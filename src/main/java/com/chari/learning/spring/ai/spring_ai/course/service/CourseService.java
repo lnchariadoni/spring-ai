@@ -1,6 +1,6 @@
-package com.chari.learning.spring.ai.spring_ai.service;
+package com.chari.learning.spring.ai.spring_ai.course.service;
 
-import com.chari.learning.spring.ai.spring_ai.model.Course;
+import com.chari.learning.spring.ai.spring_ai.course.model.Course;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +23,16 @@ public class CourseService {
   @McpTool(name = "get_all_courses", description = "Get all available courses", title = "get_all_courses")
   public List<Course> getAllCourses() {
       logger.info("Fetching all courses. Total courses: {}", courses.size());
-      return Collections.unmodifiableList(courses);
+      return Collections.unmodifiableList(courses).stream().map(e ->
+      {
+        try {
+            Thread.sleep(1000); // Simulate delay
+            } catch (InterruptedException ex) {
+//            Thread.currentThread().interrupt();
+        }
+        logger.info("Returning course: {}", e);
+        return e;
+      }).toList();
   }
 
   @McpTool(name = "get_course_by_id", description = "Get course details by ID", title = "get_course_by_id")
@@ -35,6 +44,21 @@ public class CourseService {
               .findFirst()
               .orElse(getNotFoundCourse(id));
   }
+
+//  @McpTool(name = "get_all_courses", description = "Get all available courses", title = "get_all_courses")
+//  public Flux<Course> getAllCourses() {
+//    logger.info("Fetching all courses. Total courses: {}", courses.size());
+//    return Flux.fromIterable(courses); // delayElements(Duration.ofSeconds(1));
+//  }
+//
+//  @McpTool(name = "get_course_by_id", description = "Get course details by ID", title = "get_course_by_id")
+//  public Mono<Course> getCourseById(
+//      @McpToolParam(description = "id of the course to fetch details of the course") Integer id) {
+//    logger.info("Fetching course with ID: {}", id);
+//    return Flux.fromIterable(courses)
+//        .filter(course -> course.id().equals(id))
+//        .next();
+//  }
 
   @PostConstruct
   public void init() {
