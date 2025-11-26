@@ -1,8 +1,7 @@
-package com.chari.learning.spring.ai.spring_ai.service;
+package com.chari.learning.spring.ai.spring_ai.course.service;
 
-import com.chari.learning.spring.ai.spring_ai.model.Course;
+import com.chari.learning.spring.ai.spring_ai.course.model.Course;
 import jakarta.annotation.PostConstruct;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springaicommunity.mcp.annotation.McpTool;
 import org.springaicommunity.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 public class CourseService {
