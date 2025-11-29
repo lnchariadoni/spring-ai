@@ -2,10 +2,8 @@ package com.chari.learning.spring.ai.spring_ai.dvdrental.service;
 
 import com.chari.learning.spring.ai.spring_ai.dvdrental.dto.MovieDetailDTO;
 import com.chari.learning.spring.ai.spring_ai.dvdrental.mapper.MovieMapper;
-import com.chari.learning.spring.ai.spring_ai.dvdrental.model.Movie;
 import com.chari.learning.spring.ai.spring_ai.dvdrental.repository.MovieRepository;
 import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,9 +21,9 @@ public class MovieService {
   }
 
   public MovieDetailDTO getMovieById(Long id) {
-    Optional<Movie> movie = movieRepository.findById(id);
-
-    return movie.map(movieMapper::toMovieDetailDTO).orElse(null);
+    return movieRepository.findById(id)
+        .map(movieMapper::toMovieDetailDTO)
+        .orElseThrow(() -> new RuntimeException("Movie not found for id: " + id));
   }
 
   public List<MovieDetailDTO> getAllMovies() {
