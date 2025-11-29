@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieMapper {
-  private ActorMapper actorMapper;
+  private final ActorMapper actorMapper;
 
   public MovieMapper(@Lazy ActorMapper actorMapper) {
     this.actorMapper = actorMapper;
